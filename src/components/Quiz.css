@@ -1,0 +1,118 @@
+.quiz {
+  width: auto;
+  background: #f0f9ff;
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
+  animation: fadeIn 0.7s ease forwards;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.question {
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #1e293b;
+  margin: 0;
+}
+
+.options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.option {
+  background-color: #e0f2fe;
+  padding: 1rem 1.4rem;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  user-select: none;
+}
+
+.option:hover {
+  background-color: #bae6fd;
+  border-color: #60a5fa;
+  box-shadow: 0 5px 10px rgba(37, 99, 235, 0.4);
+}
+
+.option.selected {
+  background-color: #2563eb;
+  color: white;
+  border-color: #1d4ed8;
+  box-shadow: 0 5px 12px rgba(37, 99, 235, 0.7);
+}
+
+.next-btn {
+  align-self: center;
+  background-color: #2563eb;
+  color: white;
+  padding: 0.85rem 2.5rem;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+  border: none;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.next-btn:disabled {
+  background-color: #a5b4fc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.next-btn:hover:not(:disabled) {
+  background-color: #1e40af;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.option {
+  cursor: pointer;
+  padding: 0.7rem 1rem;
+  margin: 0.4rem 0;
+  border-radius: 8px;
+  border: 2px solid #2563eb;
+  background-color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+}
+
+.option.selected {
+  background-color: #bfdbfe;
+}
+
+.option.correct {
+  background-color: #34d399; /* vert clair */
+  border-color: #059669;
+  color: white;
+  font-weight: bold;
+}
+
+.option.wrong {
+  background-color: #f87171; /* rouge clair */
+  border-color: #b91c1c;
+  color: white;
+  font-weight: bold;
+}

@@ -1,0 +1,94 @@
+.start-form {
+  width: 100%;
+  max-width: 380px;
+  background: #f9fafb;
+  padding: 2.4rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  user-select: none;
+  animation: fadeIn 0.8s ease forwards;
+  margin:0 auto;
+}
+
+.start-form h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 0.6rem;
+}
+
+.start-form input,
+.start-form select {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.1rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  transition: border-color 0.3s ease;
+}
+
+.start-form input:hover,
+.start-form select:hover {
+  border-color: #2563eb;
+}
+
+.start-form input:focus,
+.start-form select:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.start-form label {
+  font-weight: 600;
+  color: #475569;
+  align-self: flex-start;
+}
+
+.start-form button {
+  background-color: #2563eb;
+  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 16px;
+  font-weight: 700;
+  box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+}
+
+.start-form button:hover {
+  background-color: #1e40af;
+}
+.app-header {
+  width: 100%;             /* prend toute la largeur du conteneur */
+  margin-bottom: 2.5rem;
+  text-align: center;
+  color: #1e40af;
+  user-select: none;
+}
+
+/* Titre principal */
+.app-header h1 {
+  font-weight: 400;
+  font-size: 1.8rem;
+  margin: 0 0 0.3rem 0;
+  color: #1e40af;
+  line-height: 1.2;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Exposant */
+.app-header h1 sup {
+  font-size: 1rem;
+  vertical-align: super;
+  color: #2563eb;
+}
+
+/* Sous-titre */
+.app-header .subtitle {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #2563eb;
+  letter-spacing: 0.1em;
+  margin: 0;
+}

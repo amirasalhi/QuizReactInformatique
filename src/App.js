@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+// App.jsx
+import React, { useState } from "react";
+import StartForm from "./components/StartForm";
+import Quiz from "./components/Quiz";
+import Result from "./components/Result";
 
-function App() {
+const App = () => {
+  const [username, setUsername] = useState("");
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [score, setScore] = useState(0);
+  const [quizFinished, setQuizFinished] = useState(false);
+  const [numQuestions, setNumQuestions] = useState(10);
+
+  const startQuiz = (name, nbQuestions) => {
+    setUsername(name);
+    setNumQuestions(nbQuestions);
+    setQuizStarted(true);
+  };
+
+  const finishQuiz = (finalScore) => {
+    setScore(finalScore);
+    setQuizFinished(true);
+  };
+
+  const restartQuiz = () => {
+    setUsername("");
+    setQuizStarted(false);
+    setScore(0);
+    setQuizFinished(false);
+    setNumQuestions(10);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+
+
+      {!quizStarted && !quizFinished && <StartForm onStart={startQuiz} />}
+      {quizStarted && !quizFinished && (
+        <Quiz onFinish={finishQuiz} numQuestions={numQuestions} />
+      )}
+      {quizFinished && (
+        <Result username={username} score={score} totalQuestions={numQuestions} onRestart={restartQuiz} />
+      )}
     </div>
   );
-}
+};
 
 export default App;
