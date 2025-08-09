@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import "./Quiz.css";
 import allQuestions from "../data/questions";
 
@@ -18,21 +19,22 @@ const Quiz = ({ onFinish, numQuestions }) => {
   const [score, setScore] = useState(0);
   const [validated, setValidated] = useState(false);
 
-useEffect(() => {
-  const selectedQs = shuffleArray(allQuestions).slice(0, numQuestions).map(q => ({
-    ...q,
-    options: shuffleArray(q.options)
-  }));
-  setQuestions(selectedQs);
-  setCurrent(0);
-  setScore(0);
-  setSelectedOption(null);
-  setValidated(false);
-}, [numQuestions]);
-
+  useEffect(() => {
+    const selectedQs = shuffleArray(allQuestions)
+      .slice(0, numQuestions)
+      .map((q) => ({
+        ...q,
+        options: shuffleArray(q.options)
+      }));
+    setQuestions(selectedQs);
+    setCurrent(0);
+    setScore(0);
+    setSelectedOption(null);
+    setValidated(false);
+  }, [numQuestions]);
 
   const handleOptionClick = (option) => {
-    if (validated) return; // bloquer si déjà validé
+    if (validated) return;
     setSelectedOption(option);
   };
 
@@ -63,38 +65,49 @@ useEffect(() => {
       <h2>
         Question {current + 1} / {questions.length}
       </h2>
-      <p className="question">{questions[current].question}</p>
-      <ul className="options">
-        {questions[current].options.map((option, idx) => {
-          let className = "option";
-          if (validated) {
-            if (option === questions[current].answer) {
-              className += " correct";
-            } else if (option === selectedOption) {
-              className += " wrong";
-            }
-          } else if (selectedOption === option) {
-            className += " selected";
-          }
-          return (
-            <li
-              key={idx}
-              className={className}
-              onClick={() => handleOptionClick(option)}
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  handleOptionClick(option);
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.3 }}
+        >
+          <p className="question">{questions[current].question}</p>
+          <ul className="options">
+            {questions[current].options.map((option, idx) => {
+              let className = "option";
+              if (validated) {
+                if (option === questions[current].answer) {
+                  className += " correct";
+                } else if (option === selectedOption) {
+                  className += " wrong";
                 }
-              }}
-              role="button"
-              aria-pressed={selectedOption === option}
-            >
-              {option}
-            </li>
-          );
-        })}
-      </ul>
+              } else if (selectedOption === option) {
+                className += " selected";
+              }
+              return (
+                <li
+                  key={idx}
+                  className={className}
+                  onClick={() => handleOptionClick(option)}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      handleOptionClick(option);
+                    }
+                  }}
+                  role="button"
+                  aria-pressed={selectedOption === option}
+                >
+                  {option}
+                </li>
+              );
+            })}
+          </ul>
+        </motion.div>
+      </AnimatePresence>
 
       {!validated ? (
         <button
